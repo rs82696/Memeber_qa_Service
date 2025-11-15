@@ -1,4 +1,3 @@
-# Memeber_qa_Service
 # Member Question-Answering Service
 
 This repo contains a small API service that answers natural-language questions
@@ -19,7 +18,7 @@ about members using data from the public `GET /messages` endpoint
   ```json
   { "question": "When is Layla planning her trip to London?" }
 
-  ## My Approach (Implemented Solution)
+# My Approach (Implemented Solution)
 
 The goal was to build a small, production-style question–answering API that can answer natural-language questions about members based on their messages.
 
