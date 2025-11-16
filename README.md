@@ -220,7 +220,8 @@ The Member QA Service is deployed on Render.
 - **Health Check:** https://memeber-qa-service-2.onrender.com/health
   
 # How It’s Deployed (Render)
-Platform: Render Web Service (Python)
+**Platform:**
+Render Web Service (Python)
 
 **Build command:**
 pip install -r requirements.txt
