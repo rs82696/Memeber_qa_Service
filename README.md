@@ -212,3 +212,31 @@ While exploring the `/messages` dataset, a few quirks and potential data-quality
   - Mixed with one-off requests.  
   A downstream profile-building or QA system needs to distinguish stable preferences from single events.
 
+# Deployed Service
+
+The Member QA Service is deployed on Render.
+- **Base URL:** https://memeber-qa-service-2.onrender.com  
+- **API Docs (Swagger):** https://memeber-qa-service-2.onrender.com/docs  
+- **Health Check:** https://memeber-qa-service-2.onrender.com/health  
+
+# Example Query (POST /ask)
+
+```bash
+curl -X POST "https://memeber-qa-service-2.onrender.com/ask" \
+     -H "Content-Type: application/json" \
+     -d '{"question": "What seat does Layla Kawaguchi prefer?"}'
+     -d '{ "answer": "Layla Kawaguchi prefers aisle seats during her flights." }'
+
+# How It’s Deployed (Render)
+Platform: Render Web Service (Python)
+
+**Build command:**
+pip install -r requirements.txt
+
+**Start command:**
+uvicorn app.main:app --host 0.0.0.0 --port 8000
+
+**Environment variables:**
+OPENAI_API_KEY – OpenAI API key used for LLM calls
+MESSAGES_URL (optional; defaults to the provided public API) –
+https://november7-730026606190.europe-west1.run.app/messages
