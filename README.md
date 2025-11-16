@@ -82,7 +82,7 @@ This gives a simple but realistic retrieval-augmented QA system:
 While building this question-answering system, I considered several different designs.  
 The one implemented in this repo is a lightweight retrieval + LLM approach, but I evaluated a few alternatives:
 
-# 1. Simple Retrieval + LLM (Chosen Approach)
+**1. Simple Retrieval + LLM (Chosen Approach)**
 
 **Idea:**  
 - Fetch all messages from the `/messages` API and keep them in memory.
@@ -103,7 +103,7 @@ This is the approach I implemented because it’s simple, realistic, and enough 
 
 ---
 
-# 2. Embeddings + Vector Search
+**2. Embeddings + Vector Search**
 
 **Idea:**  
 - Instead of lexical overlap, encode each message using embeddings (e.g., OpenAI embeddings or sentence-transformers).
@@ -122,7 +122,7 @@ I decided this was overkill for a small take-home but would be a natural next st
 
 ---
 
-# 3. Pure Rule-Based / Template System (No LLM)
+**3. Pure Rule-Based / Template System (No LLM)**
 
 **Idea:**  
 - Write patterns/regexes to detect specific types of facts in messages:
@@ -144,7 +144,7 @@ I considered this but rejected it because the assignment is explicitly about nat
 
 ---
 
-# 4. Pre-Computed Member Profiles (ETL + Hybrid)
+**4. Pre-Computed Member Profiles (ETL + Hybrid)**
 
 **Idea:**  
 - Periodically run a batch job that:
@@ -166,7 +166,7 @@ I treated this as a longer-term evolution option if this were a real product.
 
 ---
 
-# 5. Fine-Tuning or Domain-Specific Model
+**5. Fine-Tuning or Domain-Specific Model**
 
 **Idea:**  
 - Collect a labeled dataset of (question, answer, supporting messages) pairs.
