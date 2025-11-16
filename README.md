@@ -181,5 +181,34 @@ I treated this as a longer-term evolution option if this were a real product.
 - Much more work than needed for this assignment.
 
 For a take-home task, I preferred to focus on a transparent retrieval + LLM design instead of training custom models.
-7
+
+## Data Insights & Anomalies
+
+While exploring the `/messages` dataset, a few quirks and potential data-quality issues show up:
+
+- **Consistent member identities, but some shared identifiers**  
+  Each of the 10 members has a stable `user_id`–`user_name` mapping, which is good. However, some personal identifiers are reused:
+  - The phone number `987-654-3210` appears as Layla Kawaguchi’s mobile number and later as Thiago Monteiro’s “new number”.
+  - The passport number `987654321` is used for both Sophia Al-Farsi and Vikram Desai.
+  These patterns look more like test/synthetic data than realistic production records, but they’re worth noting.
+
+- **Synthetic-looking numbers and addresses**  
+  Several values are clearly placeholder-ish, e.g.:
+  - Highly patterned numbers like `123456789`, `1122334455`, `001-235-789`, and `876543210` for membership/rewards numbers.
+  - An office address at `742 Evergreen Terrace` (a well-known fictional address) for Vikram Desai.  
+  This suggests the dataset is anonymized or semi-simulated.
+
+- **Multiple overlapping contact details per member**  
+  Many members provide several contact channels over time: new phone numbers, fax numbers, emergency contacts, and email addresses. This is realistic behavior, but it means a production system must:
+  - Treat some fields as **“latest value wins”** (e.g., phone, email).
+  - Track historical values carefully if they’re needed for audit or compliance.
+
+- **Operational anomalies in billing and payments**  
+  Several members report overcharges, duplicate charges, or unexplained transactions (e.g., $500, $950, $1,200 discrepancies). These are not schema errors, but examples of **business anomalies** in the underlying financial data that a real system might want to surface or route to support workflows.
+
+- **Rich but sometimes indirect preference data**  
+  Member preferences (seat type, room style, view, amenities, wellness, eco-friendly travel, etc.) are scattered across many free-text messages. They are generally consistent per member (e.g., Layla prefers aisle seats, Lily prefers window seats), but they are:
+  - Stored redundantly in multiple messages.
+  - Mixed with one-off requests.  
+  A downstream profile-building or QA system needs to distinguish stable preferences from single events.
 
